@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.157.108.64:3306/DFS_Sys_Basic?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+  redis:
+    host: 10.157.108.64   # Redis服务器地址
+    port: 6379            # Redis服务器连接端口
+    password: 123456      # Redis服务器连接密码（默认为空）
+    timeout: 6000ms       # 连接超时时间（毫秒）
+  elasticsearch:
+    username: elastic
+    password: 1qaz@WSX2022
+    cluster-host: 10.157.108.64
+    cluster-port: 9200
+devtools:
+  restart:
+    # 开启热部署（更改文件后，自动重启）
+    enabled: true
+    ## 设置哪些资源变动后不触发热部署，会覆盖默认的exclude内容（资源不会触发重启，但会触发实时重新加载）
+    exclude: WEB-INF/**,static/**
+    ## 监控额外的路径（优先于exclude）
+    additional-paths: src/main/java
+
+#mybatis-plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath*:/mapper/**.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 0
+      # 删除后
+      logic-delete-value: 1
+      db-type: mysql
